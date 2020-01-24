@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-//this is totoally a test
+
 export class AppComponent {
   title = 'my-first-app';
 
