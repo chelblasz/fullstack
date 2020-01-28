@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { ContactComponent } from './contact/contact.component';
 import { HeaderComponent } from './header.component';
 import { ContactsDetailComponent } from './contact/contacts-detail/contacts-detail.component';
-import { ContactsListComponent } from './contact/contacts-list/contacts-list.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { ContactListComponent } from './contact/contact-list/contact-list.compon
     ContactComponent,
     HeaderComponent,
     ContactsDetailComponent,
-    ContactsListComponent,
     ContactListComponent
   ],
   imports: [

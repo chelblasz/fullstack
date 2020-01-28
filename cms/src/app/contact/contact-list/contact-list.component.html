@@ -1,1 +1,82 @@
-<p>contact-list works!</p>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">Contacts
+      <button class="panel-heading pull-right btn btn-success">New Contact</button>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <a href="#" class="list-group-item clearfix" *ngFor="let contact of contacts">
+          <div class="pull-left">
+            <h4 class="list-group-item-heading">{{ contact.name }}</h4>
+            <p class="list-group-item-text">{{ contact.email }}</p>
+            <p class="list-group-item-text">{{ contact.phone }}</p>
+          </div>
+
+          <span class="pull-right">
+            <img [src]="contact.imageURL" alt="{{ contact.name }}" class="img-responsive"
+              style="max-height: 50px;">
+          </span>
+
+        </a>
+      </div>
+    </div>
+
+    <div class="panel-body"></div>
+</div>
+
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Contacts
+                <button class="panel-heading pull-right btn btn-success">New Contact</button>
+                <hr>
+              </div>
+
+
+              <div class="panel-body"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-success">New Contact</button>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12">
+            <a href="#" class="list-group-item clearfix" *ngFor="let contact of contact">
+              <div class="pull-left">
+                <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+                <p class="list-group-item-text">{{ recipe.description }}</p>
+              </div>
+
+              <span class="pull-right">
+                <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="img-responsive" style="max-height: 50px;">
+              </span>
+
+            </a>
+            <app-recipe-item></app-recipe-item>
+          </div>
+        </div>
+      </div> -->
+
+
+<!-- <a href="#" class="list-group-item clearfix" *ngFor="let recipe of recipes">
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">{{ contact.name }}</h4>
+          <h5 class="list-group-item-text">{{ contact.Id }}</h5>
+        </div>
+  
+        <span class="pull-right">
+          <img 
+          [src]="recipe.imagePath" 
+          alt="{{ recipe.name }}" 
+          class="img-responsive" 
+          style="max-height: 50px;">
+        </span>
+  
+      </a> -->
