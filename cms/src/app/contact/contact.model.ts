@@ -4,15 +4,15 @@ export class Contact {
     public name: string;
     public email: string;
     public phone: string;
-    public imageURL: string;
+    public imageUrl: string;
     public group: string;
 
-    constructor(Id: string, name: string, email: string, phone: string, image: string, group: string) {
+    constructor(Id: string, name: string, email: string, phone: string, imageUrl: string, group: string) {
         this.contactId = Id;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.imageURL = image;
+        this.imageUrl = imageUrl;
         this.group = group;
 
     }
