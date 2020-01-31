@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-message-item',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-item.component.css']
 })
 export class MessageItemComponent implements OnInit {
+  @Input() message: Message;
+  @Output() messageSelected = new EventEmitter<void>();
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
+    onSelected() {
+      this.messageSelected.emit();
+    }
 
 }
