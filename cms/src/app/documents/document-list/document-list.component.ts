@@ -11,12 +11,12 @@ export class DocumentListComponent implements OnInit {
 
   documents: Document[] = [
     new Document( '1',
-    'Bro. Jackson',
-    'description1',
+    'CIT260',
+    'This is an awesome class',
     'https://web.byui.edu/Directory/Employee/jacksonk.jpg', null),
     new Document( '2',
-    'Bro. Barzee',
-    'description2',
+    'CIT760',
+    'So glad this class does not exist',
     'https://web.byui.edu/Directory/Employee/barzeer.jpg', null)
   ];
 

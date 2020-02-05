@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Document } from '../../document.model';
+
 
 @Component({
   selector: 'app-document-item',
@@ -6,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./document-item.component.css']
 })
 export class DocumentItemComponent implements OnInit {
+  @Input() document: Document;
+  @Output() selectedDocument = new EventEmitter<void>();
 
   constructor() { }
-
-  ngOnInit() {
-  } 
+ ngOnInit() {
+    this.selectedDocument.emit();
+}
 }

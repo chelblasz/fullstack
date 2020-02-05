@@ -10,7 +10,6 @@ export class ContactsDetailComponent implements OnInit {
 // TODO RECEIVE CONTACT INPUT
 @Input() contact: Contact;
 
-
   constructor() { }
 
   ngOnInit() {
