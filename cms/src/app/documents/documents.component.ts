@@ -9,7 +9,7 @@ import { Document } from './document.model';
 export class DocumentsComponent implements OnInit {
 
   selectedDocument: Document;
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
   }

@@ -5,13 +5,11 @@
       <hr>
     </div>
     <div class="row">
-<div class="col-md-12">
-  <!-- reference method in  ts  -->
-        <app-contact-item 
-        *ngFor="let contact of contacts" 
-        [contact]=contact 
-        (contactIsSelected)="onSelected(contact)"></app-contact-item>
+      <div class="col-md-12">
+        <app-contact-item *ngFor="let contact of contacts" [contact]=contact (contactIsSelected)="onSelected(contact)">
+        </app-contact-item>
       </div>
-      </div>
+    </div>
     <div class="panel-body"></div>
+  </div>
 </div>
