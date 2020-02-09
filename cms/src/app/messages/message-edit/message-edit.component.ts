@@ -25,4 +25,5 @@ export class MessageEditComponent implements OnInit {
     // function onClear();
     // HELP
 }
+
 }

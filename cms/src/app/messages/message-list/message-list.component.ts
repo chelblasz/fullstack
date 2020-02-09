@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Message } from '../message.model';
+import { MessagesService } from '../messages.service';
+
 
 @Component({
   selector: 'app-message-list',
@@ -7,22 +9,17 @@ import { Message } from '../message.model';
   styleUrls: ['./message-list.component.css']
 })
 export class MessageListComponent implements OnInit {
-// need an @input to listen for output from messageEditComponent
-// need an @output to send information to messageItemComponent
-messages: Message[] = [
-  new Message('1', 'Subject', 'I like to read', 'Sarah'),
-  new Message('2', 'Subject2', 'I like to sleep', 'John')
-];
-@Input() message: Message;
-// OUTPUT SELECTED CONTACT
-// @Output() contactIsSelected = new EventEmitter<void>();
 
-  constructor() { }
+messages: Message[] = [];
+
+  constructor(private messagesService: MessagesService) { }
+// call the get messages function here.
 
   ngOnInit() {
+    this.messages = this.messagesService.getMessages();
   }
-  onSelected() {
-    // this.contactIsSelected.emit();
+  onSelected(messages: Message) {
+    this.messagesService.messageChangeEvent.emit(messages);
   }
 
 }
