@@ -15,10 +15,12 @@ contacts: Contact[] = [];
 constructor(private contactService: ContactService) {}
 
 ngOnInit() {
+  /* subscribe to the changed event this.___________(contacts: contact[]) => {
+    this.contacts = contact}*/
   this.contacts = this.contactService.getContacts();
 }
 
-onSelected(contact: Contact) {
-  this.contactService.contactIsSelectedEvent.emit(contact);
-}
+// onSelected(contact: Contact) {
+//   this.contactService.contactIsSelectedEvent.emit(contact);
+// }
 }
