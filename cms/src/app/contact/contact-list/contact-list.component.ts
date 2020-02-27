@@ -1,6 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,14 +12,25 @@ import { ContactService } from '../contact.service';
 })
 
 export class ContactListComponent implements OnInit {
-contacts: Contact[] = [];
+contacts: Contact[];
+subscription: Subscription;
 
-constructor(private contactService: ContactService) {}
+constructor(private contactService: ContactService, private router: Router,
+  private route: ActivatedRoute) {}
 
 ngOnInit() {
-  /* subscribe to the changed event this.___________(contacts: contact[]) => {
-    this.contacts = contact}*/
-  this.contacts = this.contactService.getContacts();
+    this.contacts = this.contactService.getContacts();
+    this.subscription = this.contactService.contactIsSelectedEvent
+    .subscribe(
+      (contactsList: Contact[]) => {
+        this.contacts = contactsList;
+      }
+    );
+}
+
+// copied from MAX
+onNewContact() {
+  this.router.navigate(['new'], {relativeTo: this.route});
 }
 
 // onSelected(contact: Contact) {

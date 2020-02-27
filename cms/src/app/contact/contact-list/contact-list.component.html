@@ -1,13 +1,16 @@
 <div class="panel-group">
   <div class="panel panel-default">
     <div class="panel-heading">Contacts
-      <button class="panel-heading pull-right btn btn-success">New Contact</button>
+      <button 
+      class="panel-heading pull-right btn btn-success" (click)="onNewContact()">New Contact</button>
       <hr>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <app-contact-item *ngFor="let contact of contacts" [contact]=contact (contactIsSelected)="onSelected(contact)">
-        </app-contact-item>
+        <app-contact-item 
+        *ngFor="let contact of contacts" 
+        [contact]='contact'
+        ></app-contact-item>
       </div>
     </div>
     <div class="panel-body"></div>

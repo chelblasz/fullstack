@@ -5,23 +5,30 @@ import { DocumentsComponent } from './documents/documents.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ContactComponent } from './contact/contact.component';
 
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import { ContactsDetailComponent } from './contact/contacts-detail/contacts-detail.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/documents', pathMatch: 'full' },
-  { path: 'documents', component: DocumentsComponent
-  // , children: [
-    // { path: '', component: RecipeStartComponent },
-    // { path: 'new', component: RecipeEditComponent },
-    // { path: ':id', component: RecipeDetailComponent },
-    // { path: ':id/edit', component: RecipeEditComponent },
-  // ] 
-},
+  {path: 'documents', component: DocumentsComponent, children: [
+      { path: 'new', component: DocumentEditComponent },
+      { path: ':id', component: DocumentDetailComponent },
+      { path: ':id/edit', component: DocumentEditComponent }
+    ]
+  },
   { path: 'messages', component: MessagesComponent },
-  { path: 'contact', component: ContactComponent }
+  { path: 'contacts', component: ContactComponent, children: [
+    { path: 'new', component: ContactEditComponent },
+    { path: ':id', component: ContactsDetailComponent },
+    { path: ':id/edit', component: ContactEditComponent }
+  ]
+}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

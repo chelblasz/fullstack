@@ -2,8 +2,8 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4><strong>{{ contact.name }}</strong></h4>
-        <a href="#" type="button" class="btn btn-primary pull-right" style="margin: 2px">Edit</a>
-        <a href="#" type="button" class="btn btn-danger pull-right" style="margin: 2px">Delete</a>
+        <a [routerLink]="['edit']" class="btn btn-primary pull-right" style="margin: 2px">Edit</a>
+        <a (click)="onDelete()" class="btn btn-danger pull-right" style="margin: 2px">Delete</a>
         <img
           [src]="contact.imageUrl"
           alt="{{ contact.name }}"

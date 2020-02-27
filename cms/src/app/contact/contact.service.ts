@@ -6,12 +6,30 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
   providedIn: 'root'
 })
 export class ContactService {
-// contactIsSelectedEvent = new EventEmitter<Contact>();
+contactIsSelectedEvent = new EventEmitter<Contact[]>();
 contacts: Contact[] = [];
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-   }
+constructor() {
+  this.contacts = MOCKCONTACTS;
+ }
+
+ deleteContact(contact: Contact) {
+  if (contact === null) {
+    return;
+  }
+
+  const pos = this.contacts.indexOf(contact);
+  if (pos < 0) {
+    return;
+  }
+
+  this.contacts.splice(pos, 1);
+  // const contactsListClone = this.contact.slice();
+
+  this.contactIsSelectedEvent.emit(this.contacts.slice());
+ }
+
+ 
 
 getContact(id: string): Contact {
   for (const contact of  this.contacts) {
@@ -26,4 +44,9 @@ getContact(id: string): Contact {
 getContacts(): Contact[] {
   return this.contacts.slice();
 }
+
+/* updare contact(originalContact: Contact. nerContactL contact) {
+  if (!originalContact ) and lots of other code!!!
+}*/
 }
+

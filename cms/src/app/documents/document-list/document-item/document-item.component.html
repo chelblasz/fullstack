@@ -1,5 +1,17 @@
-<a class="list-group-item clearfix documentDiv"(click)="onSelected()">
+<!-- <a class="list-group-item clearfix documentDiv"(click)="onSelected()">
   <span class="label-value">{{ document?.name }}</span>
-  </a>
+  </a> -->
 
- 
+<a [routerLink]="[document.id]" style="cursor: pointer;" routerLinkActive="active" class="list-group-item clearfix">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ document?.name }}</h4>
+    <p class="list-group-item-text">{{ document.description }}</p>
+  </div>
+</a>
+<!-- <span class="pull-right">
+        <img
+          [src]="document.imagePath"
+          alt="{{ document.name }}"
+          class="img-responsive"
+          style="max-height: 50px;">
+      </span> -->

@@ -18,6 +18,10 @@ import { MessageEditComponent } from './messages/message-edit/message-edit.compo
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { SharedComponent } from './shared/shared.component';
 import { DropdownDirective } from './shared/drop-down.directive';
+import { DocumentViewComponent } from './documents/document-view/document-view.component';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { DropdownDirective } from './shared/drop-down.directive';
     MessageEditComponent,
     MessageListComponent,
     SharedComponent,
-    DropdownDirective
+    DropdownDirective,
+    DocumentViewComponent,
+    DocumentEditComponent,
+    ContactEditComponent
+
   ],
   imports: [
     BrowserModule,
