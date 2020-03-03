@@ -28,9 +28,12 @@ ngOnInit() {
     );
 }
 
-// copied from MAX
 onNewContact() {
   this.router.navigate(['new'], {relativeTo: this.route});
+}
+
+ngOnDestroy(): void {
+  this.subscription.unsubscribe();
 }
 
 // onSelected(contact: Contact) {
