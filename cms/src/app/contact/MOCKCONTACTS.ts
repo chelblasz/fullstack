@@ -119,6 +119,14 @@ export const MOCKCONTACTS: Contact[] = [
     imageUrl: '../../assets/images/thompsonda.jpg',
     group: null
   },
+    {
+      id: '20',
+      name: 'Chelsea Blaszczyk',
+      email: 'law10011@byui.edu',
+      phone: '208-496-3776',
+      imageUrl: '../../assets/images/thompsonda.jpg',
+      group: null
+    },
 
   // teams
   // index 13
@@ -216,6 +224,7 @@ export const MOCKCONTACTS: Contact[] = [
       imageUrl: '../../assets/images/thompsonda.jpg',
       group: null
     }
+
   ]
   },
 

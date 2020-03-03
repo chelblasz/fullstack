@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject } from "rxjs";
@@ -7,14 +7,55 @@ import { Subject } from "rxjs";
   providedIn: 'root'
 })
 
-export class ContactService {
-// contactIsSelectedEvent = new EventEmitter<Contact[]>();
+export class ContactService implements OnDestroy {
 contactIsSelectedEvent = new Subject<Contact[]>();
 contacts: Contact[] = [];
+maxContactId: number;
 
 constructor() {
   this.contacts = MOCKCONTACTS;
+  this.maxContactId = this.getMaxId();
  }
+
+ addContact(newContact: Contact) {
+  if (newContact === null) {
+    return;
+  }
+  this.maxContactId++;
+  newContact.id = String(this.maxContactId);
+
+  this.contacts.push(newContact);
+  this.contactIsSelectedEvent.next(this.contacts.slice());
+  }
+
+  updateContact(originalDocument: Contact, newContact: Contact) {
+    if (newContact === null) {
+      return;
+    }
+
+    let pos = this.contacts.indexOf(originalDocument);
+    if (pos < 0) {
+      return;
+    }
+    newContact.id = originalDocument.id;
+    this.contacts[pos] = newContact;
+    let contactsListClone = this.contacts.slice();
+    this.contactIsSelectedEvent.next(contactsListClone);
+  }
+
+  getMaxId(): number {
+    let maxId = 0;
+
+    for (const contact of this.contacts) {
+      const currentId = parseInt(contact.id, 10);
+      if (currentId > maxId) {
+        maxId = currentId;
+      }
+    }
+    return maxId;
+  }
+
+
 
  deleteContact(contact: Contact) {
   if (contact === null) {
@@ -29,7 +70,7 @@ constructor() {
   this.contacts.splice(pos, 1);
   // const contactsListClone = this.contact.slice();
 
-  this.contactIsSelectedEvent.emit(this.contacts.slice());
+  this.contactIsSelectedEvent.next(this.contacts.slice());
  }
 
  
@@ -51,5 +92,9 @@ getContacts(): Contact[] {
 /* updare contact(originalContact: Contact. nerContactL contact) {
   if (!originalContact ) and lots of other code!!!
 }*/
+
+ngOnDestroy(): void {
+  this.contactIsSelectedEvent.unsubscribe();
+}
 }
 
