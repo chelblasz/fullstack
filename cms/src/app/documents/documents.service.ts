@@ -1,20 +1,46 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { Document } from "./document.model";
-import { MOCKDOCUMENTS } from "./MOCKDOCUMENTS";
 import { Subject } from "rxjs";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class DocumentsService implements OnDestroy {
   selectedDocumentEvent = new Subject<Document[]>();
-  // selectedDocumentEvent = new EventEmitter<Document[]>();
   documents: Document[];
   maxDocumentId: number;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
-    this.maxDocumentId = this.getMaxId();
+  constructor(private http: HttpClient) {
+    // this.getDocuments();
+    // this.maxDocumentId = this.getMaxId();
+  }
+
+  storeDocuments() {
+    let documents = JSON.stringify(this.documents);
+    
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
+    
+    this.http.put("https://chelseab-25822.firebaseio.com/documents.json", documents)
+    .subscribe(response => {
+      this.selectedDocumentEvent.next(this.documents.slice());
+   });
+  }
+
+  deleteDocument(document: Document) {
+    if (document === null) {
+      return;
+    }
+    const pos = this.documents.indexOf(document);
+    if (pos < 0) {
+      return;
+    }
+
+    this.documents.splice(pos, 1);
+    this.storeDocuments();
+    //this.selectedDocumentEvent.next(this.documents.slice());
+    /* documentsListClone = documents.slice()
+      documentListChangedEvent.next(doumentsListClone)*/
   }
 
   addDocumnet(newDocument: Document) {
@@ -24,7 +50,8 @@ export class DocumentsService implements OnDestroy {
     this.maxDocumentId++;
     newDocument.id = String(this.maxDocumentId);
     this.documents.push(newDocument);
-    this.selectedDocumentEvent.next(this.documents.slice());
+    this.storeDocuments();
+    //this.selectedDocumentEvent.next(this.documents.slice());
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -39,7 +66,8 @@ export class DocumentsService implements OnDestroy {
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
     let documentsListClone = this.documents.slice();
-    this.selectedDocumentEvent.next(documentsListClone);
+    this.storeDocuments();
+    //this.selectedDocumentEvent.next(documentsListClone);
   }
 
   getMaxId(): number {
@@ -54,8 +82,16 @@ export class DocumentsService implements OnDestroy {
     return maxId;
   }
 
-  getDocuments(): Document[] {
-    return this.documents.slice();
+  getDocuments() {
+    // return this.documents.slice();
+    this.http
+      .get("https://chelseab-25822.firebaseio.com/documents.json")
+        .subscribe((res: Document[]) => {
+          console.log(res);
+          this.documents = res;
+          console.log(this.documents);
+          this.selectedDocumentEvent.next(this.documents.slice());
+      });
   }
 
   getDocument(id: string): Document {
@@ -65,21 +101,6 @@ export class DocumentsService implements OnDestroy {
       }
     }
     return null;
-  }
-
-  deleteDocument(document: Document) {
-    if (document === null) {
-      return;
-    }
-    const pos = this.documents.indexOf(document);
-    if (pos < 0) {
-      return;
-    }
-
-    this.documents.splice(pos, 1);
-    this.selectedDocumentEvent.next(this.documents.slice());
-    /* documentsListClone = documents.slice()
-      documentListChangedEvent.next(doumentsListClone)*/
   }
 
   ngOnDestroy(): void {
