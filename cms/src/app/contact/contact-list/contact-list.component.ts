@@ -19,7 +19,7 @@ constructor(private contactService: ContactService, private router: Router,
   private route: ActivatedRoute) {}
 
 ngOnInit() {
-    this.contacts = this.contactService.getContacts();
+    // this.contacts = this.contactService.getContacts();
     this.subscription = this.contactService.contactIsSelectedEvent
     .subscribe(
       (contactsList: Contact[]) => {

@@ -16,7 +16,7 @@ messages: Message[] = [];
 // call the get messages function here.
 
   ngOnInit() {
-    this.messages = this.messagesService.getMessages();
+    // this.messages = this.messagesService.getMessages();
     this.messagesService.messageChangeEvent
     .subscribe(
       (messages: Message[]) => {

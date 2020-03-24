@@ -18,13 +18,14 @@ export class DocumentsService implements OnDestroy {
 
   storeDocuments() {
     let documents = JSON.stringify(this.documents);
-    
-    const headers = new HttpHeaders({'Content-Type':'application/json'});
-    
-    this.http.put("https://chelseab-25822.firebaseio.com/documents.json", documents)
-    .subscribe(response => {
-      this.selectedDocumentEvent.next(this.documents.slice());
-   });
+
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+
+    this.http
+      .put("https://chelseab-25822.firebaseio.com/documents.json", documents)
+      .subscribe(response => {
+        this.selectedDocumentEvent.next(this.documents.slice());
+      });
   }
 
   deleteDocument(document: Document) {
@@ -86,11 +87,11 @@ export class DocumentsService implements OnDestroy {
     // return this.documents.slice();
     this.http
       .get("https://chelseab-25822.firebaseio.com/documents.json")
-        .subscribe((res: Document[]) => {
-          console.log(res);
-          this.documents = res;
-          console.log(this.documents);
-          this.selectedDocumentEvent.next(this.documents.slice());
+      .subscribe((res: Document[]) => {
+        console.log(res);
+        this.documents = res;
+        console.log(this.documents);
+        this.selectedDocumentEvent.next(this.documents.slice());
       });
   }
 

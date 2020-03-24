@@ -18,7 +18,7 @@ export class DocumentListComponent implements OnInit {
     private route: ActivatedRoute) {}
 
 ngOnInit() {
-  this.documents = this.documentsService.getDocuments();
+  // this.documents = this.documentsService.getDocuments();
   this.subscription = this.documentsService.selectedDocumentEvent
     .subscribe(
       (documentList: Document[]) => {

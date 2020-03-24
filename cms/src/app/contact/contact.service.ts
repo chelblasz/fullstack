@@ -1,31 +1,58 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
+import { Injectable, OnDestroy } from "@angular/core";
+import { Contact } from "./contact.model";
 import { Subject } from "rxjs";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-
 export class ContactService implements OnDestroy {
-contactIsSelectedEvent = new Subject<Contact[]>();
-contacts: Contact[] = [];
-maxContactId: number;
+  contactIsSelectedEvent = new Subject<Contact[]>();
+  contacts: Contact[] = [];
+  maxContactId: number;
 
-constructor() {
-  this.contacts = MOCKCONTACTS;
-  this.maxContactId = this.getMaxId();
- }
-
- addContact(newContact: Contact) {
-  if (newContact === null) {
-    return;
+  constructor(private http: HttpClient) {
+    // this.contacts = MOCKCONTACTS;
+    // this.maxContactId = this.getMaxId();
   }
-  this.maxContactId++;
-  newContact.id = String(this.maxContactId);
 
-  this.contacts.push(newContact);
-  this.contactIsSelectedEvent.next(this.contacts.slice());
+  storeContacts() {
+    let contacts = JSON.stringify(this.contacts);
+
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+
+    this.http
+      .put("https://chelseab-25822.firebaseio.com/contacts.json", contacts)
+      .subscribe(response => {
+        this.contactIsSelectedEvent.next(this.contacts.slice());
+      });
+  }
+
+  deleteContact(contact: Contact) {
+    if (contact === null) {
+      return;
+    }
+
+    const pos = this.contacts.indexOf(contact);
+    if (pos < 0) {
+      return;
+    }
+
+    this.contacts.splice(pos, 1);
+    // const contactsListClone = this.contact.slice();
+    this.storeContacts();
+    // this.contactIsSelectedEvent.next(this.contacts.slice());
+  }
+
+  addContact(newContact: Contact) {
+    if (newContact === null) {
+      return;
+    }
+    this.maxContactId++;
+    newContact.id = String(this.maxContactId);
+    this.contacts.push(newContact);
+    this.storeContacts();
+    // this.contactIsSelectedEvent.next(this.contacts.slice());
   }
 
   updateContact(originalDocument: Contact, newContact: Contact) {
@@ -40,7 +67,8 @@ constructor() {
     newContact.id = originalDocument.id;
     this.contacts[pos] = newContact;
     let contactsListClone = this.contacts.slice();
-    this.contactIsSelectedEvent.next(contactsListClone);
+    this.storeContacts();
+    // this.contactIsSelectedEvent.next(contactsListClone);
   }
 
   getMaxId(): number {
@@ -55,46 +83,27 @@ constructor() {
     return maxId;
   }
 
-
-
- deleteContact(contact: Contact) {
-  if (contact === null) {
-    return;
-  }
-
-  const pos = this.contacts.indexOf(contact);
-  if (pos < 0) {
-    return;
-  }
-
-  this.contacts.splice(pos, 1);
-  // const contactsListClone = this.contact.slice();
-
-  this.contactIsSelectedEvent.next(this.contacts.slice());
- }
-
- 
-
-getContact(id: string): Contact {
-  for (const contact of  this.contacts) {
-    if (contact.id === id) {
-    return contact;
+  // does this need to be Contacts?
+  getContact(id: string): Contact {
+    for (const contact of this.contacts) {
+      if (contact.id === id) {
+        return contact;
+      }
     }
-}
 
-  return null;
-}
+    return null;
+  }
 
-getContacts(): Contact[] {
-  return this.contacts.slice();
-}
+  getContacts(id: string): Contact {
+    for (const contact of this.contacts) {
+      if (contact.id === id) {
+        return contact;
+      }
+    }
+    return null;
+  }
 
-/* updare contact(originalContact: Contact. nerContactL contact) {
-  if (!originalContact ) and lots of other code!!!
-}*/
-
-ngOnDestroy(): void {
-  this.contactIsSelectedEvent.unsubscribe();
+  ngOnDestroy(): void {
+    this.contactIsSelectedEvent.unsubscribe();
+  }
 }
-}
-
