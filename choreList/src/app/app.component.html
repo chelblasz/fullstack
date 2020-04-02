@@ -1,17 +1,55 @@
-<h1 class="center">
-  Welcome to {{ title }}
-</h1>
-<h2>
-  Please select the chores you want to assign and place them in the chore charts
-</h2>
-<button type="button" onclick="create()">New Person +</button>
 
-<div class="card" style="width: 18rem;">
-  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-  <div class="card-body">
-    <h5 class="card-title">This is the {{ Person }} of person responsible</h5>
-    <p class="card-text">This is where the list of chores will be placed for this individual</p>
-    <a href="#" class="btn btn-primary">Completed</a>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row pad-left-right">
+      <span class="title">{{ title }}</span>
+      <h5>
+        Please select the chores you want to assign and place them in the chore charts
+      </h5>
+      <a [routerLink]="['new']"class="btn btn-success pull-right">Add Document</a>
+      <button type="button" onclick="create()">New Chore Chart +</button>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="center-panel">
+      <div class="card" style="width: 20rem;">
+        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+        <div class="card-body">
+          <h3 class="card-title">Chore List</h3>
+          <a [routerLink]="[chorelist.id]" style="cursor: pointer;" routerLinkActive="active" class="list-group-item clearfix">
+            <div class="pull-left">
+              <h4 class="list-group-item-heading">{{ chorelist?.name }}</h4>
+              <p class="list-group-item-text">{{ chorelist.description }}</p>
+            </div>
+          </a>
+          <a href="#" class="btn btn-success">Completed</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="panel-body">
+  <div class="center-panel">
+    <div class="card" style="width: 18rem;">
+      <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+      <div class="card-body">
+        <h3 class="card-title">Chore Chart 1</h3>
+        <h5 class="card-title">{{ Person }} of person responsible</h5>
+        <p class="card-text">This is where the list of chores will be placed for this individual</p>
+        <a href="#" class="btn btn-success">Completed</a>
+      </div>
+    </div>
   </div>
 </div>
-    <!-- password for chelsea user mongoDB - IFO184pPzEeTMZAN -->
+
+<div class="panel-body">
+  <div class="center-panel">
+    <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" style="width: 18rem;">
+    <input class="form-control" type="text" placeholder="Default input" style="width: 18rem;">
+    <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" style="width: 18rem;">
+  </div>
+</div>
+</div>
+<!-- password for chelsea user mongoDB - IFO184pPzEeTMZAN -->

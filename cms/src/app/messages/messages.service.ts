@@ -54,7 +54,7 @@ export class MessagesService implements OnDestroy {
       console.log(res);
       this.messages = res;
       console.log(this.messages);
-      // this.messageChangeEvent.next(this.messages.slice());
+      this.messageChangeEvent.next(this.messages.slice());
       this.storeMessages();
     });
 }

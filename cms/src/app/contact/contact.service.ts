@@ -28,6 +28,19 @@ export class ContactService implements OnDestroy {
       });
   }
 
+  getContacts() {
+    this.http.get('https://chelseab-25822.firebaseio.com/contacts.json')
+      .subscribe(
+        (contacts: Contact[]) => {
+          this.contacts = contacts;
+          this.contacts.sort((a, b) => (a['name'] < b['name']) ? 1 : (a['name'] > b['name']) ? -1 : 0);
+          this.contactIsSelectedEvent.next(this.contacts.slice());
+        }, (error: any) => {
+          console.log('something bad happened...');
+        }
+      );
+  }
+
   deleteContact(contact: Contact) {
     if (contact === null) {
       return;
@@ -92,16 +105,10 @@ export class ContactService implements OnDestroy {
     }
 
     return null;
+
+    
   }
 
-  getContacts(id: string): Contact {
-    for (const contact of this.contacts) {
-      if (contact.id === id) {
-        return contact;
-      }
-    }
-    return null;
-  }
 
   ngOnDestroy(): void {
     this.contactIsSelectedEvent.unsubscribe();

@@ -16,11 +16,12 @@ messages: Message[] = [];
 // call the get messages function here.
 
   ngOnInit() {
-    // this.messages = this.messagesService.getMessages();
+    this.messagesService.getMessages();
     this.messagesService.messageChangeEvent
     .subscribe(
       (messages: Message[]) => {
         this.messages = messages;
+        // console.log(this.messages)
       })
   }
   onSelected(messages: Message) {
