@@ -4,36 +4,79 @@
     Welcome to {{ title }}
   </h1>
   <h2>
-    Please insert the chores that need doing and who is assigned to the task
+    Please insert:
+    1) The chores that need doing,
+    2) Who is assigned to the task,
+    or create <button type="button" class="createCard" onclick="create()">New Card +</button>
   </h2>
-  <button type="button" onclick="create()">New Card +</button>
-  <!-- 
-<div class="card" style="width: 18rem;"> -->
 
+
+  <!-- -__________________________________________________________________________________________________________________________________ -->
   <div class="card">
     <div class="container">
       <h4><b>Kitchen</b></h4>
-      <h5 class="card-title">{{ Person }}</h5>
-      <p>Tasks to be done: <input class="tasks" type="text" placeholder="Fill Dishwasher"><button>+</button></p>
+      <h5 class="card-title">Name:<input type="text"></h5>
+      <div>
+        <form>
+          <h6> Tasks to be done:
+            <input class="add-input" placeholder="fill dishwasher" type="text" ng-model="formTodoText" ng-model-instant>
+            <button type="button" class="createChore" ng-click="addTodo()">+</button>
+          </h6>
+        </form>
+        <ul>
+          <li ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.done">
+            <span class="done-{{todo.done}}">{{todo.text}}</span>
+          </li>
+        </ul>
+        <button class="clear-btn" ng-click="clearCompleted()">Clear completed</button>
+      </div>
     </div>
   </div>
-
+  <!-- __________________________________________________________________________________________________________________________________ -->
   <div class="card">
     <div class="container">
       <h4><b>Living Room</b></h4>
-      <h5 class="card-title">{{ Person }}</h5>
-      <p>Tasks to be done: <input class="tasks" type="text" placeholder="Vacuum"><button>+</button></p>
+      <h5 class="card-title">Name:<input type="text"></h5>
+      <div>
+        <form>
+          <h6> Tasks to be done:
+            <input class="add-input" placeholder="Vacuum Carpet" type="text" ng-model="formTodoText" ng-model-instant>
+            <button type="button" class="createChore" ng-click="addTodo()">+</button>
+          </h6>
+        </form>
+        <ul>
+          <li ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.done">
+            <span class="done-{{todo.done}}">{{todo.text}}</span>
+          </li>
+        </ul>
+        <button class="clear-btn" ng-click="clearCompleted()">Clear completed</button>
+      </div>
     </div>
   </div>
-
+<!-- ____________________________________________________________________________________________________________________________________ -->
   <div class="card">
     <div class="container">
       <h4><b>Bathroom</b></h4>
-      <h5 class="card-title">{{ Person }}</h5>
-      <p>Tasks to be done: <input class="tasks" type="text" placeholder="Sanitize Toilet"><button>+</button></p>
+      <h5 class="card-title">Name:<input type="text"></h5>
+      <div>
+        <form>
+          <h6> Tasks to be done:
+            <input class="add-input" placeholder="Sanitize Toilet" type="text" ng-model="formTodoText" ng-model-instant>
+            <button type="button" class="createChore" ng-click="addTodo()">+</button>
+          </h6>
+        </form>
+        <ul>
+          <li ng-repeat="todo in todos">
+            <input type="checkbox" ng-model="todo.done">
+            <span class="done-{{todo.done}}">{{todo.text}}</span>
+          </li>
+        </ul>
+        <button class="clear-btn" ng-click="clearCompleted()">Clear completed</button>
+      </div>
     </div>
   </div>
-
 </body>
 
 <!-- password for chelsea user mongoDB - IFO184pPzEeTMZAN -->
