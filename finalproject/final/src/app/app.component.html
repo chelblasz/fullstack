@@ -1,17 +1,39 @@
-<h1>
-  Welcome to {{ title }}
-</h1>
-<h2>
-  Please select the chores you want to assign and place them in the chore charts
-</h2>
-<button type="button" onclick="create()">New Person +</button>
+<body>
 
-<div class="card" style="width: 18rem;">
-  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-  <div class="card-body">
-    <h5 class="card-title">{{ Person }}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+  <h1>
+    Welcome to {{ title }}
+  </h1>
+  <h2>
+    Please insert the chores that need doing and who is assigned to the task
+  </h2>
+  <button type="button" onclick="create()">New Card +</button>
+  <!-- 
+<div class="card" style="width: 18rem;"> -->
+
+  <div class="card">
+    <div class="container">
+      <h4><b>Kitchen</b></h4>
+      <h5 class="card-title">{{ Person }}</h5>
+      <p>Tasks to be done: <input class="tasks" type="text" placeholder="Fill Dishwasher"><button>+</button></p>
+    </div>
   </div>
-</div>
-    <!-- password for chelsea user mongoDB - IFO184pPzEeTMZAN -->
+
+  <div class="card">
+    <div class="container">
+      <h4><b>Living Room</b></h4>
+      <h5 class="card-title">{{ Person }}</h5>
+      <p>Tasks to be done: <input class="tasks" type="text" placeholder="Vacuum"><button>+</button></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="container">
+      <h4><b>Bathroom</b></h4>
+      <h5 class="card-title">{{ Person }}</h5>
+      <p>Tasks to be done: <input class="tasks" type="text" placeholder="Sanitize Toilet"><button>+</button></p>
+    </div>
+  </div>
+
+</body>
+
+<!-- password for chelsea user mongoDB - IFO184pPzEeTMZAN -->

@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Build Chore lists';
+  title = 'Build Chore Cards';
   Person = 'Name()'; //Put input box name 
 }
